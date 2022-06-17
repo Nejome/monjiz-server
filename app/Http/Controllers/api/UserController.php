@@ -15,13 +15,11 @@ class UserController extends BaseController
 
             $data['token'] = $user->createToken('token-for-'.$user->id)->plainTextToken;
 
-            $data['user'] = $user;
-
             $message = 'تم تسجيل الدخول بنجاح';
 
             return $this->success($message, $data);
         }else{
-            $error = 'عفواً قم بالتحقق من صحة البيانات المدخلة';
+            $error = 'عفواً قم بالتحقق من صحة بيانات تسجيل الدخول الخاصة بك';
 
             return $this->error($error);
         }
