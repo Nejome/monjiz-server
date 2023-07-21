@@ -4,14 +4,13 @@ namespace App\Http\Controllers\api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\api\BaseController as BaseController;
-use Illuminate\Support\Facades\Auth;
 
 class UserController extends BaseController
 {
     public function login(Request $request)
     {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-            $user = Auth::user();
+        if(auth()->attempt(['email' => $request->email, 'password' => $request->password])){
+            $user = auth()->user();
 
             $data['token'] = $user->createToken('token-for-'.$user->id)->plainTextToken;
 
@@ -27,7 +26,7 @@ class UserController extends BaseController
 
     public function logout()
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
         $user->tokens()->delete();
 
